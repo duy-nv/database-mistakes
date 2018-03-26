@@ -1,9 +1,7 @@
-## What are common database development mistakes made by application developers?
 ## Những lỗi phổ biến nào mà các nhà phát triển ứng dụng tạo ra khi thiết kế database ?
 
 _nguồn https://stackoverflow.com/questions/621884/database-development-mistakes-made-by-application-developers_
 
-**1. Not using appropriate indices**
 **1. Không sử dụng các chỉ số thích hợp**
 
 Đây là điều khá đơn giản nhưng nó vẫn xảy ra mọi lúc. Các khóa ngoại nên có các indexs. Nếu bạn đang sử dụng một trường trong một lệnh WHERE thì bạn nên (hoặc có thể) có một index trong câu lệnh này. Các chỉ mục như vậy thường bao gồm nhiều cột dựa trên các truy vấn bạn cần thực hiện
@@ -46,8 +44,6 @@ SELECT DISTINCT ..
 
 Điều này ngắn gọn là để đảm bảo bạn không lấy ra các bản ghi giống nhau dẫn tới việc lấy ra các đối tượng bị sao chép. Đôi khi bạn sẽ thấy mọi người đang làm điều này tất tốt. Nếu bạn xem nó quá nhiều thì nó là một lá cờ đỏ thực sự. Điều đó không có nghĩa là DISTINCT là không tốt hay không có các ứng dụng hợp lệ. Nó đều bao gồm cả 2 mặt nhứng không phải là câu lệnh 
 
-DISTINCT is bad or doesn't have valid applications. It does (on both counts) but it's not a surrogate or a stopgap for writing correct queries.
-
 Lấy từ [Why I Hate DISTINCT](http://weblogs.sqlteam.com/markc/archive/2008/11/11/60752.aspx):
 > Lúc mà có nhiều thứ trở nên không đúng là lúc mà 1 nhà phát triển đang xây dựng các truy vấn lồng nhau, join các bảng với nhau, và đột nhiên ông nhận ra rằng có vẻ như ông đang nhận được các bản ghi lặp lại (hoặc thậm chí nhiều hơn) và phản ứng ngay lập tức ... "giải pháp" của ông ta đối với "vấn đề" này là ném vào truy vấn từ khóa DISTINCT và POOF,  tất cả các rắc rối của ông biến mất.
 
@@ -55,9 +51,7 @@ Lấy từ [Why I Hate DISTINCT](http://weblogs.sqlteam.com/markc/archive/2008/
 
 Một sai lầm phổ biến khác của các nhà phát triển ứng dụng cơ sở dữ liệu là không nhận ra các lệnh kết hợp với nhau sẽ tiêu tốn hơn so với các lệnh join (ví dụ Mệnh đề GROUP BY) khi đem so sánh với nhau.
 
-Để cho bạn thấy được vấn đề này phổ biến như nào, tôi đã từng đề cập vấn đề này một vài lần trong các bài viết dưới đây và được downvoted rất nhiều. Ví dụ:
-
-To give you an idea of how widespread this is, I've written on this topic several times here and been downvoted a lot for it. For example:
+Để cho bạn thấy được vấn đề này phổ biến như nào, tôi đã từng đề cập vấn đề này một vài lần trong các bài viết dưới đây và bị downvoted rất nhiều. Ví dụ:
 
 Lấy từ [SQL statement - “join” vs “group by and having”](https://stackoverflow.com/questions/477006/sql-statement-join-vs-group-by-and-having/477013#477013):
 
@@ -116,9 +110,7 @@ Và đột nhiên bạn có một cái nhìn rất đơn giản về dữ liệu
 
 Đây là một lỗi lớn. Bây giờ tôi thích PHP nhưng nếu bạn không biết bạn đang làm gì thì thật sự dễ để tạo các trang web dễ bị tấn công. Việc tổng hợp lỗi này được thông kế đầy đủ trong [story of little Bobby Tables](http://xkcd.com/327/).
 
-Dữ liệu cấp bởi người dùng thông qua URL, form và **cookie** nên sẽ luôn luôn bị xem là dễ bị tấn công và lọc nhất. 
-
-Data provided by the user by way of URLs, form data **and cookies** should always be treated as hostile and sanitized. Đảm bảo bạn đang nhận được những gì bạn muốn.
+Dữ liệu cấp bởi người dùng thông qua URL, form và **cookie** nên sẽ luôn luôn bị xem là dễ bị tấn công và lọc nhất. Đảm bảo bạn đang nhận được những gì bạn muốn.
 
 **8. Không sử dụng các câu lệnh được lấy sẵn trước đó**
 
