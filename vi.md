@@ -1,16 +1,16 @@
-## Những lỗi phổ biến nào mà các nhà phát triển ứng dụng tạo ra khi thiết kế database ?
+## Những lỗi phổ biến nào mà các nhà phát triển ứng dụng ~~tạo ra~~ **gặp phải** khi thiết kế database (What are common database development mistakes made by application developers) ?
 
 _nguồn https://stackoverflow.com/questions/621884/database-development-mistakes-made-by-application-developers_
 
 **1. Không sử dụng các chỉ số thích hợp**
 
-Đây là điều khá đơn giản nhưng nó vẫn xảy ra mọi lúc. Các khóa ngoại nên có các indexs. Nếu bạn đang sử dụng một trường trong một lệnh WHERE thì bạn nên (hoặc có thể) có một index trong câu lệnh này. Các chỉ mục như vậy thường bao gồm nhiều cột dựa trên các truy vấn bạn cần thực hiện
+Đây là điều khá đơn giản nhưng nó vẫn xảy ra mọi lúc. Các khóa ngoại nên có các indexs **chỉ mục**. Nếu bạn đang sử dụng một trường trong một lệnh WHERE thì bạn nên (hoặc có thể) có một index trong câu lệnh này. Các chỉ mục như vậy thường bao gồm nhiều cột dựa trên các truy vấn bạn cần thực hiện
 
 **2. Không thực thi toàn vẹn tham chiếu**
 
 Cơ sở dữ liệu của bạn có thể thay đổi, nhưng nếu cơ sở dữ liệu của bạn hỗ trợ tham chiếu toàn vẹn- có nghĩa là tất cả các khóa ngoại phải được đảm bảo luôn tham chiếu đến một thưc thể nào đó đã tồn tại--bạn nên dùng nó.
 
-Điều này được thấy khá phổ biến trong cơ sở dữ liệu MySql. Tôi không tin là MyISAM hỗ trợ nó. Bạn sẽ không thể biết được ai đang sử dụng MyISAM hay InnoDB.
+Điều này được thấy khá phổ biến trong cơ sở dữ liệu MySql. Tôi không tin là MyISAM hỗ trợ nó.~~Bạn sẽ không thể biết được ai đang sử dụng MyISAM hay InnoDB.~~ ( InnoDB does. You'll find people who are using MyISAM or those that are using InnoDB but aren't using it anyway.) **em không biết dịch sao cho hay**  
 
  Xem thêm tại đây:
 
@@ -18,11 +18,11 @@ Cơ sở dữ liệu của bạn có thể thay đổi, nhưng nếu cơ sở d�
 - [Are foreign keys really necessary in a database design?](https://stackoverflow.com/questions/18717/are-foreign-keys-really-necessary-in-a-database-design)
 - [Are foreign keys really necessary in a database design?](http://www.diovo.com/2008/08/are-foreign-keys-really-necessary-in-a-database-design/)
 
-**3. Sử dụng các khóa chính thay mặt thay vì các khóa chính tự nhiên **
+**3. ~~Sử dụng các khóa chính thay mặt thay vì các khóa chính tự nhiên~~(Using natural rather than surrogate (technical) primary keys) Sử dụng các khóa tự nhiên thay vì các khóa chính đại diện (kỹ thuật) **
 
-Các natural key là những khóa trên cơ sở các dữ liệu duy nhất có nghĩa bên ngoài. Các ví dụ điển hình là các mã sản phẩm, 2 chữ cái mã tiểu bang (US), mã số bảo mật mạng xã hội, vân vân,...Các khóa chính kỹ thuật và các khóa chính tự nhiên hoàn toàn không có ý nghĩa bên ngoài hệ thống của ta. Chúng được tạo ra hoàn toàn để xác định thực thể và thông thường các trường (trong SQL Server, MySQL, ...) hoặc chuỗi (trong Oracle) tự động tăng giá trị  hoặc các trình tự (nhất là Oracle).
+~~Các natural key là những khóa trên cơ sở các dữ liệu duy nhất có nghĩa bên ngoài~~ (Natural keys are keys based on externally meaningful data that is (ostensibly) unique) **Khóa tự nhiên là khóa dựa trên dữ liệu thực tế bên ngoài mà (có vẻ) duy nhất**. Các ví dụ điển hình là các mã sản phẩm, 2 chữ cái mã tiểu bang (US), mã số bảo mật mạng xã hội, vân vân,...~~Các khóa chính kỹ thuật và các khóa chính tự nhiên~~ ( Surrogate or technical primary keys) **Các khóa đại diên hoặc kỹ thuật** hoàn toàn không có ý nghĩa bên ngoài hệ thống của ta. ~~Chúng được tạo ra hoàn toàn để xác định thực thể và thông thường các trường (trong SQL Server, MySQL, ...) hoặc chuỗi (trong Oracle) tự động tăng giá trị  hoặc các trình tự (nhất là Oracle).~~ ( They are invented purely for identifying the entity and are typically auto-incrementing fields (SQL Server, MySQL, others) or sequences (most notably Oracle).) **Nó là những sáng tạo chỉ dùng để xác định thực thể và thường là trường tự động tăng (SQL Server, MySQL, khác nữa) hoặc là chuỗi liên tiếp (đáng chú ý nhất là Oracle).**  
 
-Theo ý kiến của tôi thì bạn nên **luôn luôn ** sử dụng các khóa kỹ thuật, vấn đề này được đề ra trong những câu hỏi dưới đây:
+Theo ý kiến của tôi thì bạn nên *luôn luôn * sử dụng các khóa kỹ thuật, vấn đề này được đề ra trong những câu hỏi dưới đây:
 
 - [How do you like your primary keys?](https://stackoverflow.com/questions/404040/how-do-you-like-your-primary-keys)
 - [What's the best practice for primary keys in tables?](https://stackoverflow.com/questions/337503/whats-the-best-practice-for-primary-keys-in-tables)
@@ -42,7 +42,7 @@ Bạn thường gặp nó trong các truy vấn được tạo bởi ORM. Hãy x
 
 SELECT DISTINCT ..
 
-Điều này ngắn gọn là để đảm bảo bạn không lấy ra các bản ghi giống nhau dẫn tới việc lấy ra các đối tượng bị sao chép. Đôi khi bạn sẽ thấy mọi người đang làm điều này tất tốt. Nếu bạn xem nó quá nhiều thì nó là một lá cờ đỏ thực sự. Điều đó không có nghĩa là DISTINCT là không tốt hay không có các ứng dụng hợp lệ. Nó đều bao gồm cả 2 mặt nhứng không phải là câu lệnh 
+Điều này ngắn gọn là để đảm bảo bạn không lấy ra các bản ghi giống nhau dẫn tới việc lấy ra các đối tượng bị sao chép. Đôi khi bạn sẽ thấy mọi người đang làm điều này tất tốt. Nếu bạn xem nó quá nhiều thì ~~nó là một lá cờ đỏ thực sự~~ (it's a real red flag) **nó thực sự dáng báo động**. Điều đó không có nghĩa là DISTINCT là không tốt hay không có các ứng dụng hợp lệ. Nó đều bao gồm cả 2 mặt nhứng không phải là câu lệnh 
 
 Lấy từ [Why I Hate DISTINCT](http://weblogs.sqlteam.com/markc/archive/2008/11/11/60752.aspx):
 > Lúc mà có nhiều thứ trở nên không đúng là lúc mà 1 nhà phát triển đang xây dựng các truy vấn lồng nhau, join các bảng với nhau, và đột nhiên ông nhận ra rằng có vẻ như ông đang nhận được các bản ghi lặp lại (hoặc thậm chí nhiều hơn) và phản ứng ngay lập tức ... "giải pháp" của ông ta đối với "vấn đề" này là ném vào truy vấn từ khóa DISTINCT và POOF,  tất cả các rắc rối của ông biến mất.
@@ -128,7 +128,7 @@ SELECT * FROM users WHERE username = :username
 
 phụ thuộc vào nền tảng của bạn.
 
-Tôi đã nhìn thấy cơ sở dữ liệu mang đến đầu gối của họ bằng cách làm điều này . Về cơ bản, mỗi khi cơ sở dữ liệu hiện đại gặp một truy vấn mới, nó phải biên dịch nó. Nếu nó gặp một truy vấn nó được nhìn thấy trước, bạn đang tạo cho cơ sở dữ liệu có thể cache truy vấn đã biên dịch và dự định có thể thực thi. Bằng cách thực hiện các truy vấn `nhieeuf` nhiều bạn đang giúp cơ sở dữ liệu có thể tính toán và tối ưu hóa cho phù hợp (ví dụ, bằng cách ghim các truy vấn đã được biên dịch trong bộ nhớ) 
+~~Tôi đã nhìn thấy cơ sở dữ liệu mang đến đầu gối của họ bằng cách làm điều này~~ (I've seen databases brought to their knees by doing this)  . Về cơ bản, mỗi khi cơ sở dữ liệu hiện đại gặp một truy vấn mới, nó phải biên dịch nó. Nếu nó gặp một truy vấn nó được nhìn thấy trước, bạn đang tạo cho cơ sở dữ liệu có thể cache truy vấn đã biên dịch và dự định có thể thực thi. Bằng cách thực hiện các truy vấn ~~`nhieeuf`~~ **nhiều** nhiều bạn đang giúp cơ sở dữ liệu có thể tính toán và tối ưu hóa cho phù hợp (ví dụ, bằng cách ghim các truy vấn đã được biên dịch trong bộ nhớ) 
 
 Sử dụng các câu lệnh được lấy sẵn cũng sẽ cung cấp cho bạn số liệu thống kê có ý nghĩa về tần suất các truy vấn được sử dụng.
 
