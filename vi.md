@@ -1,4 +1,4 @@
-## Những lỗi phổ biến nào mà các nhà phát triển ứng dụng tạo ra khi thiết kế database ?
+## Những lỗi phổ biến nào mà các nhà phát triển ứng dụng tạo ra khi thiết kế database  ? **Những sai lầm về phát triển dữ liệu mà các nhà phát triển phần mềm thường mắc phải?**
 
 _nguồn https://stackoverflow.com/questions/621884/database-development-mistakes-made-by-application-developers_
 
@@ -10,12 +10,13 @@ _nguồn https://stackoverflow.com/questions/621884/database-development-mistake
 
 Cơ sở dữ liệu của bạn có thể thay đổi, nhưng nếu cơ sở dữ liệu của bạn hỗ trợ tham chiếu toàn vẹn- có nghĩa là tất cả các khóa ngoại phải được đảm bảo luôn tham chiếu đến một thưc thể nào đó đã tồn tại--bạn nên dùng nó.
 
-Điều này được thấy khá phổ biến trong cơ sở dữ liệu MySql. Tôi không tin là MyISAM hỗ trợ nó. Bạn sẽ không thể biết được ai đang sử dụng MyISAM hay InnoDB.
+Điều này được thấy khá phổ biến trong cơ sở dữ liệu MySql. ~~Tôi không tin là MyISAM hỗ trợ nó. Bạn sẽ không thể biết được ai đang sử dụng MyISAM hay InnoDB~~.
+Bạn sẽ tìm thấy những người sử dụng MyISAM hoặc đang sử dụng InnoDB nhưng sẽ không sử dụng nó (nó ở đây là toàn vẹn tham chiếu) theo bất cứ cách nào.( You'll find people who are using MyISAM or those that are using InnoDB but aren't using it anyway.)
 
  Xem thêm tại đây:
 
-- [How important are constraints like NOT NULL and FOREIGN KEY if I’ll always control my database input with php?](https://stackoverflow.com/questions/382309/how-important-are-constraints-like-not-null-and-foreign-key-if-ill-always-contr)
-- [Are foreign keys really necessary in a database design?](https://stackoverflow.com/questions/18717/are-foreign-keys-really-necessary-in-a-database-design)
+- [Các ràng buộc quan trọng như thế nào như NOT NULL và FOREIGN KEY nếu tôi luôn luôn kiểm soát đầu vào của cơ sở dữ liệu trong php?](https://stackoverflow.com/questions/382309/how-important-are-constraints-like-not-null-and-foreign-key-if-ill-always-contr)
+- [khóa ngoại thực sự cần thiết trong thiết kế csdl?](https://stackoverflow.com/questions/18717/are-foreign-keys-really-necessary-in-a-database-design)
 - [Are foreign keys really necessary in a database design?](http://www.diovo.com/2008/08/are-foreign-keys-really-necessary-in-a-database-design/)
 
 **3. Sử dụng các khóa chính thay mặt thay vì các khóa chính tự nhiên **
@@ -42,10 +43,10 @@ Bạn thường gặp nó trong các truy vấn được tạo bởi ORM. Hãy x
 
 SELECT DISTINCT ..
 
-Điều này ngắn gọn là để đảm bảo bạn không lấy ra các bản ghi giống nhau dẫn tới việc lấy ra các đối tượng bị sao chép. Đôi khi bạn sẽ thấy mọi người đang làm điều này tất tốt. Nếu bạn xem nó quá nhiều thì nó là một lá cờ đỏ thực sự. Điều đó không có nghĩa là DISTINCT là không tốt hay không có các ứng dụng hợp lệ. Nó đều bao gồm cả 2 mặt nhứng không phải là câu lệnh 
+Điều này ngắn gọn là để đảm bảo bạn không lấy ra các bản ghi giống nhau dẫn tới việc lấy ra các đối tượng bị sao chép. Đôi khi bạn sẽ thấy mọi người đang làm điều này tất tốt. Nếu bạn xem nó quá nhiều thì nó là một lá cờ đỏ thực sự. Điều đó không có nghĩa là DISTINCT là không tốt hay không có các ứng dụng hợp lệ. ~~Nó đều bao gồm cả 2 mặt nhứng không phải là câu lệnh~~ (but it's not a surrogate or a stopgap for writing correct queries.) **nó không phải là 1 đại diện hoặc là 1 rào cản cho việc viết truy vấn hợp lệ.** 
 
 Lấy từ [Why I Hate DISTINCT](http://weblogs.sqlteam.com/markc/archive/2008/11/11/60752.aspx):
-> Lúc mà có nhiều thứ trở nên không đúng là lúc mà 1 nhà phát triển đang xây dựng các truy vấn lồng nhau, join các bảng với nhau, và đột nhiên ông nhận ra rằng có vẻ như ông đang nhận được các bản ghi lặp lại (hoặc thậm chí nhiều hơn) và phản ứng ngay lập tức ... "giải pháp" của ông ta đối với "vấn đề" này là ném vào truy vấn từ khóa DISTINCT và POOF,  tất cả các rắc rối của ông biến mất.
+> ~~Lúc mà có nhiều thứ trở nên không đúng là lúc mà 1 nhà phát triển đang xây dựng các truy vấn lồng nhau~~ **theo ý kiến của tôi là trong trường hợp mọi thứ bắt đầu trở nên rắc rối khi một nhà phát triển đang xây dựng truy vấn đáng kể** (Where things start to go sour in my opinion is when a developer is building substantial query), join các bảng với nhau, và đột nhiên ông nhận ra rằng có vẻ như ông đang nhận được các bản ghi lặp lại (hoặc thậm chí nhiều hơn) và phản ứng ngay lập tức ... "giải pháp" của ông ta đối với "vấn đề" này là ném vào truy vấn từ khóa DISTINCT và POOF,  tất cả các rắc rối của ông biến mất.
 
 **5. Sử dụng các lệnh kết hợp lại thay vì lệnh join**
 
@@ -87,8 +88,8 @@ Không phải tất cả các nhà cung cấp cơ sở dữ liệu hỗ trợ vi
 
 Ví dụ:
 
-- Ted là một Person, và là kiểu dữ liệu con của một Party;
-- Ted có nhiều roles, trong đó có Employee;
+- Ted là một Person, và là kiểu dữ liệu con **Phần tử nghe hay hơn** của một Party;
+- Ted có nhiều roles, ~~trong đó có~~ **một trong số đó** Employee;
 - Intel là một organisation, là kiểu dữ liệu con của một Party;
 - Intel có nhiều roles, trong đó có Employer;
 - Intel thuê Ted, nghĩa là có một quan hệ giữa các role của 2 bên.
