@@ -36,7 +36,7 @@ Hãy nhớ rằng các quốc gia cũng có thể không tồn tại (ví dụ Y
 
 **4. Viết các truy vấn yêu cầu
 
-DISTINCT để thực hiện công việc**
+DISTINCT để thực hiện công việc**
 
 Bạn thường gặp nó trong các truy vấn được tạo bởi ORM. Hãy xem phần log của Hibernate và bạn sẽ thấy tất cả các truy vấn đều bắt đầu với
 
@@ -44,7 +44,7 @@ SELECT DISTINCT ..
 
 Điều này ngắn gọn là để đảm bảo bạn không lấy ra các bản ghi giống nhau dẫn tới việc lấy ra các đối tượng bị sao chép. Đôi khi bạn sẽ thấy mọi người đang làm điều này tất tốt. Nếu bạn xem nó quá nhiều thì nó là một lá cờ đỏ thực sự. Điều đó không có nghĩa là DISTINCT là không tốt hay không có các ứng dụng hợp lệ. Nó đều bao gồm cả 2 mặt nhứng không phải là câu lệnh 
 
-Lấy từ [Why I Hate DISTINCT](http://weblogs.sqlteam.com/markc/archive/2008/11/11/60752.aspx):
+Lấy từ [Why I Hate DISTINCT](http://weblogs.sqlteam.com/markc/archive/2008/11/11/60752.aspx):
 > Lúc mà có nhiều thứ trở nên không đúng là lúc mà 1 nhà phát triển đang xây dựng các truy vấn lồng nhau, join các bảng với nhau, và đột nhiên ông nhận ra rằng có vẻ như ông đang nhận được các bản ghi lặp lại (hoặc thậm chí nhiều hơn) và phản ứng ngay lập tức ... "giải pháp" của ông ta đối với "vấn đề" này là ném vào truy vấn từ khóa DISTINCT và POOF,  tất cả các rắc rối của ông biến mất.
 
 **5. Sử dụng các lệnh kết hợp lại thay vì lệnh join**
@@ -53,7 +53,7 @@ Một sai lầm phổ biến khác của các nhà phát triển ứng dụng c�
 
 Để cho bạn thấy được vấn đề này phổ biến như nào, tôi đã từng đề cập vấn đề này một vài lần trong các bài viết dưới đây và bị downvoted rất nhiều. Ví dụ:
 
-Lấy từ [SQL statement - “join” vs “group by and having”](https://stackoverflow.com/questions/477006/sql-statement-join-vs-group-by-and-having/477013#477013):
+Lấy từ [SQL statement - “join” vs “group by and having”](https://stackoverflow.com/questions/477006/sql-statement-join-vs-group-by-and-having/477013#477013):
 
 > Truy vấn thứ nhất:
 
@@ -114,7 +114,7 @@ Dữ liệu cấp bởi người dùng thông qua URL, form và **cookie** nên 
 
 **8. Không sử dụng các câu lệnh được lấy sẵn trước đó**
 
-Các câu lệnh đã được lấy sẵn trước đó là khi bạn biên dịch 1 câu lệnh, trừ các lệnh insert, update và các mệnh để where và các thành phần theo sau. Ví dụ 
+Các câu lệnh đã được lấy sẵn trước đó là khi bạn biên dịch 1 câu lệnh, trừ các lệnh insert, update và các mệnh để where và các thành phần theo sau. Ví dụ 
 
 SELECT * FROM users WHERE username = 'bob'
 
@@ -133,10 +133,9 @@ Tôi đã nhìn thấy cơ sở dữ liệu mang đến đầu gối của họ 
 Sử dụng các câu lệnh được lấy sẵn cũng sẽ cung cấp cho bạn số liệu thống kê có ý nghĩa về tần suất các truy vấn được sử dụng.
 
 Các lệnh được lấy sẵn cũng sẽ bảo vệ khỏi các tấn công SQL injection tốt hơn
-
 **9. Chuẩn hóa yếu**
 
-Chuẩn hóa cơ sở dữ liệu về cơ bản là quá trình tối ưu hóa thiết kế cơ sở dữ liệu hay là cách bạn tổ chức dữ liệu trong bảng
+Chuẩn hóa cơ sở dữ liệu về cơ bản là quá trình tối ưu hóa thiết kế cơ sở dữ liệu hay là cách bạn tổ chức dữ liệu thành các bảng
 
 Chỉ là trong tuần này tôi đã xem qua một vài đoạn code mà ai đó đã thực hiện gộp một mảng lại và chèn mảng đó vào một cột riêng lẻ trong database. Như thông thường thì ta sẽ coi như mỗi phần từ trong mảng đó tương ứng với một hàng trong 1 bảng con (ví dụ: quan hệ 1-nhiều).
 
@@ -151,11 +150,11 @@ But lack of normalization comes in many forms.
 Xem thêm:
 
 - [Chuẩn hóa: Bao nhiêu là đủ?](http://www.techrepublic.com/article/normalization-how-far-is-far-enough/)
-- [SQL by Design: Tại sao bạn cần chuẩn hóa cơ sở dữ liệu? ](http://www.sqlmag.com/Article/ArticleID/4887/sql_server_4887.html)
+- [SQL by Design: Tại sao bạn cần chuẩn hóa cơ sở dữ liệu? ](http://www.sqlmag.com/Article/ArticleID/4887/sql_server_4887.html)
 
 **10. Chuẩn hóa dư thừa**
 
-Điều này dường như có vẻ mâu thuẫn với phần trước nhưng việc chuẩn hóa cũng giống như nhiều thứ khác, nó chỉ là một công cụ mà thôi.  Nó chỉ là một phương tiện để đạt được mục đích của ta chứ không phải bất kỳ điều gì khác. Tôi nghĩ là rất nhiều nhà phát triển đã quên điều này và bắt đầu coi một "" là một "". Unit test là một ví dụ điển hình cho điều vừa nói. 
+Điều này dường như có vẻ mâu thuẫn với phần trước nhưng việc chuẩn hóa cũng giống như nhiều thứ khác, nó chỉ là một công cụ mà thôi.  Nó chỉ là một phương tiện để đạt được mục đích của ta chứ không phải bất kỳ điều gì khác. Tôi nghĩ là rất nhiều nhà phát triển đã quên điều này và bắt đầu coi một "công cụ" là một "kết thúc". Unit test là một ví dụ điển hình cho điều vừa nói. 
 
 Tôi đã từng làm việc trên một hệ thống có mô hình phân cấp khách hàng rất đồ sộ như sau: 
 
@@ -183,7 +182,7 @@ Trích từ bài viết [Hướng dẫn thiết kế cơ sở dữ liệu quan h
 
 **12. Không phân tích hiệu năng trong tất cả các câu truy vấn**
 
-Tính thực dụng được ưu tiên hàng đầu, đặc biệt trong cơ sở dữ liệu. Nếu bạn đang khăng khăng tuân theo các nguyên tắc đã trở thành giáo điều thì bạn có lẽ đã mắc phải sai lầm. Ví dụ chính là các truy vấn gom nhóm ở phần trên. Cách truy vấn gom nhóm trong có vẻ 'ngắn gon' nhưng hiệu năng lại không tốt. Việc so sánh hiệu năng nên kết thúc cuộc tranh luận (nhưng không), mà còn nhiều hơn thế nữa: việc đưa ra cái nhìn quá không tốt trong phần đầu là không tốt, thậm chí là có hại. 
+Tính thực dụng được ưu tiên hàng đầu, đặc biệt trong cơ sở dữ liệu. Nếu bạn đang khăng khăng tuân theo các nguyên tắc đã trở thành giáo điều thì bạn có lẽ đã mắc phải sai lầm. Ví dụ chính là các truy vấn gom nhóm ở phần trên. Cách truy vấn gom nhóm trong có vẻ 'ngắn gon' nhưng hiệu năng lại không tốt. Việc so sánh hiệu năng nên kết thúc cuộc tranh luận (nhưng không), mà còn nhiều hơn thế nữa: việc đưa ra view thống báo không tốt trong phần đầu là ngu dốt, thậm chí là nguy hiểm. 
 
 **13. Quá phụ thuộc vào UNION ALL và đặc biệt cấu trúc UNION**
 
@@ -237,7 +236,7 @@ Sự thiếu hiểu biết này thể hiện theo một vài cách.
 
 - Áp dụng không thích hợp quá nhiều quy tắc hoặc bắt buộc logic nên cơ sở dữ liệu.
 - Việc sử dụng không phù hợp hoặc lạm dụng các con trỏ. Đặc biệt là khi chỉ cần một truy vấn duy nhất là đủ
-- Hiểu sai rằng trigger khi được tạo trong hàng thì sẽ ảnh hưởng tới nhiều hàng cần phải update
+- Hiểu sai rằng trigger được thực hiện ngay khi mỗi dòng bị ảnh hưởng trong cập nhiều dòng
 
 Xác định phân chia trách nhiệm rõ ràng và cố gắng sử dụng công cụ thích hợp để giải quyết từng vấn đề.
 
